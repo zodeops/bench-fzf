@@ -2,11 +2,11 @@
 name: build
 
 on:
-  push:
-    branches: [ master, devel ]
-  pull_request:
-    branches: [ master, devel ]
   workflow_dispatch:
+    inputs:
+      runner:
+        description: runs-on label for every job
+        default: ubuntu-latest
 
 permissions:
   contents: read
@@ -16,7 +16,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ${{ inputs.runner }}
     steps:
     - uses: actions/checkout@v7
       with:
